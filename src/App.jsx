@@ -24,6 +24,14 @@ export default function UltimateHabitTrackerApp() {
     }))
   );
 
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [loginError, setLoginError] = useState('');
+
+  const HARD_CODED_USERNAME = 'admin';
+  const HARD_CODED_PASSWORD = 'habit123';
+
   const daysInMonth = new Date(year, month + 1, 0).getDate();
 
   const currentDate = new Date();
@@ -114,12 +122,100 @@ export default function UltimateHabitTrackerApp() {
     'July','August','September','October','November','December'
   ];
 
+  const handleLogin = (e) => {
+    e.preventDefault();
+
+    if (
+      username === HARD_CODED_USERNAME &&
+      password === HARD_CODED_PASSWORD
+    ) {
+      setIsLoggedIn(true);
+      setLoginError('');
+    } else {
+      setLoginError('Invalid username or password');
+    }
+  };
+
+  if (!isLoggedIn) {
+    return (
+      <div className="min-h-screen bg-black flex items-center justify-center p-6">
+        <div className="w-full max-w-md bg-slate-900 border border-slate-800 rounded-3xl shadow-2xl p-8">
+
+          <div className="text-center mb-8">
+            <h1 className="text-4xl font-bold text-white mb-3">
+              Habit Tracker
+            </h1>
+            <p className="text-slate-400">
+              Secure Login Access
+            </p>
+          </div>
+
+          <form onSubmit={handleLogin} className="space-y-5">
+
+            <div>
+              <label className="block text-sm font-semibold text-slate-400 mb-2">
+                Username
+              </label>
+
+              <input
+                type="text"
+                value={username}
+                onChange={(e) => setUsername(e.target.value)}
+                placeholder="Enter username"
+                className="w-full px-4 py-3 rounded-xl bg-black border border-slate-700 text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
+              />
+            </div>
+
+            <div>
+              <label className="block text-sm font-semibold text-slate-400 mb-2">
+                Password
+              </label>
+
+              <input
+                type="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                placeholder="Enter password"
+                className="w-full px-4 py-3 rounded-xl bg-black border border-slate-700 text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
+              />
+            </div>
+
+            {loginError && (
+              <div className="text-red-400 text-sm font-medium">
+                {loginError}
+              </div>
+            )}
+
+            <button
+              type="submit"
+              className="w-full bg-blue-600 hover:bg-blue-700 transition-all duration-300 text-white font-bold py-3 rounded-xl"
+            >
+              Login
+            </button>
+
+            <div className="bg-slate-950 border border-slate-800 rounded-2xl p-4 mt-6 text-sm text-slate-400">
+              <div><span className="font-semibold text-white">Demo Username:</span> admin</div>
+              <div><span className="font-semibold text-white">Demo Password:</span> habit123</div>
+            </div>
+          </form>
+        </div>
+      </div>
+    );
+  };
+
   return (
     <div className="min-h-screen bg-black text-white p-3 sm:p-6">
       <div className="max-w-[1800px] mx-auto">
 
         <div className="bg-slate-900 rounded-3xl shadow-2xl p-4 sm:p-6 mb-6 border border-slate-800">
           <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-6">
+
+            <button
+              onClick={() => setIsLoggedIn(false)}
+              className="absolute top-6 right-6 bg-red-600 hover:bg-red-700 px-4 py-2 rounded-xl text-sm font-semibold transition-all"
+            >
+              Logout
+            </button>
 
             <div>
               <h1 className="text-2xl sm:text-4xl font-bold text-white">
