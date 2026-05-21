@@ -192,11 +192,6 @@ export default function UltimateHabitTrackerApp() {
             >
               Login
             </button>
-
-            <div className="bg-slate-950 border border-slate-800 rounded-2xl p-4 mt-6 text-sm text-slate-400">
-              <div><span className="font-semibold text-white">Demo Username:</span> admin</div>
-              <div><span className="font-semibold text-white">Demo Password:</span> habit123</div>
-            </div>
           </form>
         </div>
       </div>
