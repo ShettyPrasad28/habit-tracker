@@ -8,8 +8,8 @@ export default function UltimateHabitTrackerApp() {
     'Wake Up 5 AM',
     'Exercise',
     'German',
-    'IELTS',
-    'Trading',
+    'Read',
+    'Grind',
     'Skill Building',
     'Sleep before 10 PM'
   ];
